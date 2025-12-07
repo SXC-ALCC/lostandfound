@@ -1,0 +1,177 @@
+Lost and Found API Contract
+=============================
+
+Base URL: https://lost-and-found-ps91.onrender.com
+
+1. Post Lost Item
+-----------------
+Endpoint: POST /postLostItem
+Description: Submit a new lost item request.
+Content-Type: multipart/form-data
+
+Request Parts:
+- item (Required): JSON object representing the item details.
+  Schema:
+  {
+    "personName": "string (mandatory)",
+    "itemName": "string (mandatory)",
+    "date": "YYYY-MM-DD (mandatory)",
+    "description": "string (mandatory)",
+    "category": "string (mandatory, Enum: ID_CARD, BAG, ELECTRONICS, STATIONARY, OTHERS)",
+    "location": "string (mandatory)",
+    "reporterEmail": "string (mandatory, valid email)"
+  }
+- photo (Optional): File (image) of the item.
+
+Response:
+- 200 OK: Request created successfully.
+  Body:
+  {
+    "status": "success",
+    "message": "Lost item request created successfully",
+    "data": { ...item details... }
+  }
+- 400 Bad Request: Validation failed.
+
+2. Post Found Item
+------------------
+Endpoint: POST /postFoundItem
+Description: Submit a new found item request.
+Content-Type: multipart/form-data
+
+Request Parts:
+- item (Required): JSON object representing the item details.
+  Schema: Same as Post Lost Item.
+- photo (Optional): File (image) of the item.
+
+Response:
+- 200 OK: Request created successfully.
+  Body:
+  {
+    "status": "success",
+    "message": "Found item request created successfully",
+    "data": { ...item details... }
+  }
+- 400 Bad Request: Validation failed.
+
+3. Remove Lost Item
+-------------------
+Endpoint: DELETE /removeLostItem/{id}
+Description: Remove a lost item request by ID.
+
+Path Variables:
+- id: Long (ID of the item to remove)
+
+Response:
+- 200 OK: Item removed.
+  Body:
+  {
+    "status": "success",
+    "message": "Item removed successfully",
+    "data": "Item removed successfully"
+  }
+- 404 Not Found: Item not found or not a lost item.
+
+4. Remove Found Item
+--------------------
+Endpoint: DELETE /removeFoundItem/{id}
+Description: Remove a found item request by ID.
+
+Path Variables:
+- id: Long (ID of the item to remove)
+
+Response:
+- 200 OK: Item removed.
+  Body:
+  {
+    "status": "success",
+    "message": "Item removed successfully",
+    "data": "Item removed successfully"
+  }
+- 404 Not Found: Item not found or not a found item.
+
+5. Approve Lost Item
+--------------------
+Endpoint: POST /approveLostItem
+Description: Approve or reject a lost item request.
+Content-Type: application/json
+
+Request Body:
+{
+  "requestNumber": number (mandatory, ID of the item),
+  "decision": boolean (mandatory, true for approve, false for reject)
+}
+
+Response:
+- 200 OK: Status updated.
+  Body:
+  {
+    "status": "success",
+    "message": "Item approval status updated",
+    "data": "Item approval status updated"
+  }
+- 404 Not Found: Item not found.
+
+6. Approve Found Item
+---------------------
+Endpoint: POST /approveFoundItem
+Description: Approve or reject a found item request.
+Content-Type: application/json
+
+Request Body:
+{
+  "requestNumber": number (mandatory, ID of the item),
+  "decision": boolean (mandatory, true for approve, false for reject)
+}
+
+Response:
+- 200 OK: Status updated.
+  Body:
+  {
+    "status": "success",
+    "message": "Item approval status updated",
+    "data": "Item approval status updated"
+  }
+- 404 Not Found: Item not found.
+
+7. Get Lost Items To Approve
+----------------------------
+Endpoint: GET /getLostItemsToApprove
+Description: Retrieve a list of lost items pending approval.
+
+Response:
+- 200 OK: List retrieved.
+  Body:
+  {
+    "status": "success",
+    "message": "Lost items to approve retrieved successfully",
+    "data": [ ...list of items... ]
+  }
+
+8. Get Found Items To Approve
+-----------------------------
+Endpoint: GET /getFoundItemsToApprove
+Description: Retrieve a list of found items pending approval.
+
+Response:
+- 200 OK: List retrieved.
+  Body:
+  {
+    "status": "success",
+    "message": "Found items to approve retrieved successfully",
+    "data": [ ...list of items... ]
+  }
+
+Data Models
+===========
+
+Item Category Enum:
+- ID_CARD
+- BAG
+- ELECTRONICS
+- STATIONARY
+- OTHERS
+
+Item Type Enum:
+- LOST
+- FOUND
