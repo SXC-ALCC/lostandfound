@@ -1,60 +1,62 @@
-import { useState, useMemo } from "react";
+import { useState, useMemo, useEffect } from "react";
 import ItemCard from "@/components/ItemCard";
 import { Input } from "@/components/ui/input";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
-import { Search } from "lucide-react";
+import { Search, Loader2 } from "lucide-react";
 import { Item, ItemStatus, ItemCategory } from "@/types/item";
-
-const mockItems: Item[] = [
-  {
-    id: "1",
-    status: "lost",
-    name: "Blue Backpack",
-    category: "bag",
-    description: "Navy blue backpack with laptop compartment, lost near the library",
-    location: "Library",
-    date: "2025-10-10",
-    posterName: "Sidant Chaturbedi",
-    section: "A2A",
-    email: "024a121@sxc.edu.np",
-    imageUrl: "https://images.unsplash.com/photo-1553062407-98eeb64c6a62?w=500",
-    createdAt: "2025-10-10T10:00:00Z",
-    approved: true,
-  },
-  {
-    id: "2",
-    status: "found",
-    name: "Student ID Card",
-    category: "id-card",
-    description: "Found ID card with name Prerit Gautam",
-    location: "Cafeteria",
-    date: "2025-10-11",
-    posterName: "Stuti Upreti",
-    section: "A2A",
-    email: "024a123@sxc.edu.np",
-    createdAt: "2025-10-11T14:30:00Z",
-    approved: true,
-  },
-];
+import { getLostItems, getFoundItems } from "@/services/api";
+import { useToast } from "@/hooks/use-toast";
 
 const Items = () => {
+  const { toast } = useToast();
+  const [items, setItems] = useState<Item[]>([]);
+  const [loading, setLoading] = useState(true);
   const [searchQuery, setSearchQuery] = useState("");
   const [statusFilter, setStatusFilter] = useState<ItemStatus | "all">("all");
   const [categoryFilter, setCategoryFilter] = useState<ItemCategory | "all">("all");
 
+  useEffect(() => {
+    const fetchItems = async () => {
+      try {
+        setLoading(true);
+        const [lostItems, foundItems] = await Promise.all([
+          getLostItems(),
+          getFoundItems(),
+        ]);
+        setItems([...lostItems, ...foundItems]);
+      } catch (error) {
+        console.error("Error fetching items:", error);
+        toast({
+          title: "Error",
+          description: "Failed to load items. Please try again later.",
+          variant: "destructive",
+        });
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchItems();
+  }, [toast]);
+
   const filteredItems = useMemo(() => {
-    return mockItems.filter((item) => {
-      const matchesSearch = 
+    return items.filter((item) => {
+      const matchesSearch =
         item.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
         item.description.toLowerCase().includes(searchQuery.toLowerCase()) ||
         item.category.toLowerCase().includes(searchQuery.toLowerCase());
-      
+
       const matchesStatus = statusFilter === "all" || item.status === statusFilter;
       const matchesCategory = categoryFilter === "all" || item.category === categoryFilter;
 
       return matchesSearch && matchesStatus && matchesCategory;
-    }).sort((a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime());
-  }, [searchQuery, statusFilter, categoryFilter]);
+    }).sort((a, b) => {
+      // Handle potential missing dates or invalid dates safely
+      const dateA = new Date(a.date).getTime();
+      const dateB = new Date(b.date).getTime();
+      return dateB - dateA;
+    });
+  }, [items, searchQuery, statusFilter, categoryFilter]);
 
   return (
     <div className="min-h-screen pt-16">
@@ -103,7 +105,11 @@ const Items = () => {
         </div>
 
         {/* Items Grid */}
-        {filteredItems.length === 0 ? (
+        {loading ? (
+          <div className="flex justify-center py-12">
+            <Loader2 className="w-8 h-8 animate-spin text-primary" />
+          </div>
+        ) : filteredItems.length === 0 ? (
           <div className="text-center py-12">
             <p className="text-muted-foreground">No items found matching your criteria.</p>
           </div>

@@ -1,0 +1,227 @@
+== Info: Host lost-and-found-ps91.onrender.com:443 was resolved.
+== Info: IPv6: (none)
+== Info: IPv4: 216.24.57.251, 216.24.57.7
+== Info:   Trying 216.24.57.251:443...
+== Info: Connected to lost-and-found-ps91.onrender.com (216.24.57.251) port 443
+== Info: ALPN: curl offers h2,http/1.1
+=> Send SSL data, 5 bytes (0x5)
+0000: .....
+== Info: TLSv1.3 (OUT), TLS handshake, Client hello (1):
+=> Send SSL data, 512 bytes (0x200)
+0000: ........l..\ZH.b.....o$1-...d.....JU(d .m......%..m........9.-..
+0040: $..g&t..>.......,.0.........+./...$.(.k.#.'.g.....9.....3.....=.
+0080: <.5./.....u...%.#.. lost-and-found-ps91.onrender.com............
+00c0: .............................h2.http/1.1.........1.....*.(......
+0100: ...................................+........-.....3.&.$... .....
+0140: h.Z../.rs....h..}1CGyK.zM|......................................
+0180: ................................................................
+01c0: ................................................................
+== Info:  CAfile: /etc/ssl/certs/ca-certificates.crt
+== Info:  CApath: /etc/ssl/certs
+<= Recv SSL data, 5 bytes (0x5)
+0000: ....z
+== Info: TLSv1.3 (IN), TLS handshake, Server hello (2):
+<= Recv SSL data, 122 bytes (0x7a)
+0000: ...v........P..!..Q..;d.....t1....g(j. .m......%..m........9.-..
+0040: $..g&t.......3.$... ..).9.#/..4l...tz.....<..N.8)?^6.+....
+<= Recv SSL data, 5 bytes (0x5)
+0000: .....
+<= Recv SSL data, 5 bytes (0x5)
+0000: .....
+<= Recv SSL data, 1 bytes (0x1)
+0000: .
+== Info: TLSv1.3 (IN), TLS handshake, Encrypted Extensions (8):
+<= Recv SSL data, 19 bytes (0x13)
+0000: .................h2
+== Info: TLSv1.3 (IN), TLS handshake, Certificate (11):
+<= Recv SSL data, 2529 bytes (0x9e1)
+0000: ...........0...0..L............[?7....|..XQ0...*.H.=...0;1.0...U
+0040: ....US1.0...U....Google Trust Services1.0...U....WE10...25113019
+0080: 5350Z..260228205348Z0.1.0...U....onrender.com0Y0...*.H.=....*.H.
+00c0: =....B....[M..v..n|..z.....j[.....a....'..../y..'.B..X.ynY.d...`
+0100: -j.....B...S0..O0...U...........0...U.%..0...+.......0...U......
+0140: .0.0...U..........H(..r.........l.0...U.#..0....w.5g......{..y{.
+0180: ..80^..+........R0P0'..+.....0...http://o.pki.goog/s/we1/1-00%..
+01c0: +.....0...http://i.pki.goog/we1.crt0'..U... 0...onrender.com..*.
+0200: onrender.com0...U. ..0.0...g.....06..U.../0-0+.).'.%http://c.pki
+0240: .goog/we1/BwYkd5XkY8c.crl0.....+.....y............u.I..i..|..6..
+0280: .d..[......UR...)................F0D. N...`._..Q4...+o....o..3..
+02c0: .$/.... <.g..Wc..]=b......^.Z..&2"arP ...u..W.....>3.,........=q
+0300: 2%.!.%.a.N!.............F0D. ....D.W......8..@.W!..8..s..8.... a
+0340: .......C..fnAk.7;.n.9.n....oE..0...*.H.=....G.0D. \3.......9?.#w
+0380: ..`......-I..i..... $.hJ.a.......]%.p.......a.h.]G.2.....0...0..
+03c0: %..........w.,"Jv.].....0...*.H.=...0G1.0...U....US1"0 ..U....Go
+0400: ogle Trust Services LLC1.0...U....GTS Root R40...231213090000Z..
+0440: 290220140000Z0;1.0...U....US1.0...U....Google Trust Services1.0.
+0480: ..U....WE10Y0...*.H.=....*.H.=....B..o.:.gWGL!..@.G].XG.@.\....7
+04c0: ..|..K.................Y.,&...&%....V...0..0...U...........0...U
+0500: .%..0...+.........+.......0...U.......0.......0...U.......w.5g..
+0540: ....{..y{...80...U.#..0....L..t.I6.....>.j....04..+........(0&0$
+0580: ..+.....0...http://i.pki.goog/r4.crt0+..U...$0"0 ......http://c.
+05c0: pki.goog/r/r4.crl0...U. ..0.0...g.....0...*.H.=....h.0e.1....Q..
+0600: C..u......@Az&....2-=....#H.R.>dy....,.nU..0&..h.b...~....D~.LI.
+0640: .l.b4...~:..P.....}s..RAM..V....~0..z0..b.........0.3.C.....I=..
+0680: 0...*.H........0W1.0...U....BE1.0...U....GlobalSign nv-sa1.0...U
+06c0: ....Root CA1.0...U....GlobalSign Root CA0...231115034321Z..28012
+0700: 8000042Z0G1.0...U....US1"0 ..U....Google Trust Services LLC1.0..
+0740: .U....GTS Root R40v0...*.H.=....+...".b...ts.h.`.C.5..0{KI...a..
+0780: .F.k.a.5.@.s...0Z.<..|.@v;...G.*...js..r9.)...._^X.e...e......s.
+07c0: .j/.........0..0...U...........0...U.%..0...+.........+.......0.
+0800: ..U.......0....0...U.......L..t.I6.....>.j....0...U.#..0...`{f.E
+0840: ....P/}..4....K06..+........*0(0&..+.....0...http://i.pki.goog/g
+0880: sr1.crt0-..U...&0$0". ....http://c.pki.goog/r/gsr1.crl0...U. ..0
+08c0: .0...g.....0...*.H..............B........?c.....hH.9"s...N-.1...
+0900: ...6...y.....j.{.}.t..e.h*,,.B..q...-.k..n.}V.#XX.%...G... .....
+0940: ...U.yu5,1[?e....B.....^.....-G...c~....k.......gX......I.P[?:.%
+0980: ....\.yW.6...&.........>..n..<..8.A..^S.>. W...?H......j#....?/.
+09c0: ...n..F...g.3&...K..6.&;[........
+== Info: TLSv1.3 (IN), TLS handshake, CERT verify (15):
+<= Recv SSL data, 79 bytes (0x4f)
+0000: ...K...G0E.!....bw..YkN......=.OV.....s.w.%0.. ...m..:.........+
+0040: +.aa. ........Z
+== Info: TLSv1.3 (IN), TLS handshake, Finished (20):
+<= Recv SSL data, 52 bytes (0x34)
+0000: ...0_..4.]..e..w.0.L.@.......*.?....o]=..yM..A.CB.u.
+=> Send SSL data, 5 bytes (0x5)
+0000: .....
+== Info: TLSv1.3 (OUT), TLS change cipher, Change cipher spec (1):
+=> Send SSL data, 1 bytes (0x1)
+0000: .
+=> Send SSL data, 5 bytes (0x5)
+0000: ....E
+=> Send SSL data, 1 bytes (0x1)
+0000: .
+== Info: TLSv1.3 (OUT), TLS handshake, Finished (20):
+=> Send SSL data, 52 bytes (0x34)
+0000: ...0..w.*....e.....,Nc.....bm......[.O....Q..$.....T
+== Info: SSL connection using TLSv1.3 / TLS_AES_256_GCM_SHA384 / X25519 / id-ecPublicKey
+== Info: ALPN: server accepted h2
+== Info: Server certificate:
+== Info:  subject: CN=onrender.com
+== Info:  start date: Nov 30 19:53:50 2025 GMT
+== Info:  expire date: Feb 28 20:53:48 2026 GMT
+== Info:  subjectAltName: host "lost-and-found-ps91.onrender.com" matched cert's "*.onrender.com"
+== Info:  issuer: C=US; O=Google Trust Services; CN=WE1
+== Info:  SSL certificate verify ok.
+== Info:   Certificate level 0: Public key type EC/prime256v1 (256/128 Bits/secBits), signed using ecdsa-with-SHA256
+== Info:   Certificate level 1: Public key type EC/prime256v1 (256/128 Bits/secBits), signed using ecdsa-with-SHA384
+== Info:   Certificate level 2: Public key type EC/secp384r1 (384/192 Bits/secBits), signed using ecdsa-with-SHA384
+=> Send SSL data, 5 bytes (0x5)
+0000: ....Q
+=> Send SSL data, 1 bytes (0x1)
+0000: .
+== Info: using HTTP/2
+== Info: [HTTP/2] [1] OPENED stream for https://lost-and-found-ps91.onrender.com/postFoundItem
+== Info: [HTTP/2] [1] [:method: POST]
+== Info: [HTTP/2] [1] [:scheme: https]
+== Info: [HTTP/2] [1] [:authority: lost-and-found-ps91.onrender.com]
+== Info: [HTTP/2] [1] [:path: /postFoundItem]
+== Info: [HTTP/2] [1] [user-agent: curl/8.5.0]
+== Info: [HTTP/2] [1] [accept: */*]
+== Info: [HTTP/2] [1] [content-length: 460]
+== Info: [HTTP/2] [1] [content-type: multipart/form-data; boundary=------------------------j8RjXxI5PXmQTpjwr2gJje]
+=> Send SSL data, 5 bytes (0x5)
+0000: .....
+=> Send SSL data, 1 bytes (0x1)
+0000: .
+=> Send header, 220 bytes (0xdc)
+0000: POST /postFoundItem HTTP/2
+001c: Host: lost-and-found-ps91.onrender.com
+0044: User-Agent: curl/8.5.0
+005c: Accept: */*
+0069: Content-Length: 460
+007e: Content-Type: multipart/form-data; boundary=--------------------
+00be: ----j8RjXxI5PXmQTpjwr2gJje
+00da: 
+=> Send SSL data, 5 bytes (0x5)
+0000: .....
+=> Send SSL data, 1 bytes (0x1)
+0000: .
+=> Send data, 460 bytes (0x1cc)
+0000: --------------------------j8RjXxI5PXmQTpjwr2gJje
+0032: Content-Disposition: form-data; name="item"; filename="item.json
+0072: "
+0075: Content-Type: application/json
+0095: 
+0097: {.    "personName": "Test User",.    "itemName": "Found Item",. 
+00d7:    "date": "2025-12-13",.    "description": "Found Description",
+0117: .    "category": "OTHERS",.    "location": "Found Location",.   
+0157:  "reporterEmail": "test@example.com",.    "itemType": "FOUND".}
+0198: --------------------------j8RjXxI5PXmQTpjwr2gJje--
+== Info: We are completely uploaded and fine
+<= Recv SSL data, 5 bytes (0x5)
+0000: .....
+<= Recv SSL data, 1 bytes (0x1)
+0000: .
+== Info: TLSv1.3 (IN), TLS handshake, Newsession Ticket (4):
+<= Recv SSL data, 230 bytes (0xe6)
+0000: ....... .K.P....l........~>B.=...S...}.lo...*e.8.Q..7..9....Y.#.
+0040: .21...]..YX...w.......!....d-f....wx.`..#.x$(.S.4.;..4...^..g..6
+0080: .^z.Q..j...D..<..c.....;.....p$.i..l8..(1W..2eP9Ak.........&@'..
+00c0: ..K...Z... ;!.unge.H.|..8...bY........
+== Info: TLSv1.3 (IN), TLS handshake, Newsession Ticket (4):
+<= Recv SSL data, 230 bytes (0xe6)
+0000: ....... .._B....l........~>B.=..S....3|..Xlg..*..z.....z@K...e..
+0040: ...!..U..P:v..`O&.2c<..B...H.p...RcH.v..E........s(..|..).......
+0080: 2..R...u._?.....z........|g.G(]'yN.55k.Sr.o....x'z.P.L.&..;..p.9
+00c0: -...5../.'I.....Ja/.....7A............
+== Info: old SSL session ID is stale, removing
+<= Recv SSL data, 5 bytes (0x5)
+0000: ....9
+<= Recv SSL data, 1 bytes (0x1)
+0000: .
+<= Recv SSL data, 5 bytes (0x5)
+0000: .....
+<= Recv SSL data, 1 bytes (0x1)
+0000: .
+=> Send SSL data, 5 bytes (0x5)
+0000: .....
+=> Send SSL data, 1 bytes (0x1)
+0000: .
+<= Recv SSL data, 5 bytes (0x5)
+0000: .....
+<= Recv SSL data, 1 bytes (0x1)
+0000: .
+<= Recv SSL data, 5 bytes (0x5)
+0000: ....Z
+<= Recv SSL data, 1 bytes (0x1)
+0000: .
+<= Recv SSL data, 5 bytes (0x5)
+0000: .....
+<= Recv SSL data, 1 bytes (0x1)
+0000: .
+<= Recv header, 13 bytes (0xd)
+0000: HTTP/2 200 
+<= Recv header, 37 bytes (0x25)
+0000: date: Sat, 13 Dec 2025 04:18:43 GMT
+<= Recv header, 32 bytes (0x20)
+0000: content-type: application/json
+<= Recv header, 30 bytes (0x1e)
+0000: cf-ray: 9ad2a8b76bc87674-KTM
+<= Recv header, 29 bytes (0x1d)
+0000: rndr-id: 179ee59d-1e19-48f5
+<= Recv header, 14 bytes (0xe)
+0000: vary: Origin
+<= Recv header, 37 bytes (0x25)
+0000: vary: Access-Control-Request-Method
+<= Recv header, 38 bytes (0x26)
+0000: vary: Access-Control-Request-Headers
+<= Recv header, 23 bytes (0x17)
+0000: vary: Accept-Encoding
+<= Recv header, 32 bytes (0x20)
+0000: x-render-origin-server: Render
+<= Recv header, 26 bytes (0x1a)
+0000: cf-cache-status: DYNAMIC
+<= Recv header, 20 bytes (0x14)
+0000: server: cloudflare
+<= Recv header, 30 bytes (0x1e)
+0000: alt-svc: h3=":443"; ma=86400
+<= Recv header, 2 bytes (0x2)
+0000: 
+<= Recv data, 320 bytes (0x140)
+0000: {"success":true,"message":"Found item request created successful
+0040: ly","data":{"id":9,"personName":"Test User","itemName":"Found It
+0080: em","date":"2025-12-13","description":"Found Description","itemT
+00c0: ype":"FOUND","category":"OTHERS","location":"Found Location","re
+0100: porterEmail":"test@example.com","photo":null,"isApproved":null}}
+== Info: Connection #0 to host lost-and-found-ps91.onrender.com left intact

@@ -1,0 +1,10 @@
+{
+    "personName": "Test User",
+    "itemName": "Found Item",
+    "date": "2025-12-13",
+    "description": "Found Description",
+    "category": "OTHERS",
+    "location": "Found Location",
+    "reporterEmail": "test@example.com",
+    "itemType": "FOUND"
+}
