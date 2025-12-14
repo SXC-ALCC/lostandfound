@@ -71,7 +71,7 @@ export const getLostItems = async (): Promise<Item[]> => {
         posterName: item.personName,
         section: "N/A", // API doesn't seem to return section?
         email: item.reporterEmail,
-        imageUrl: item.imageUrl, // Assuming API returns imageUrl
+        imageUrl: item.photo ? `data:image/jpeg;base64,${item.photo}` : undefined,
         createdAt: new Date().toISOString(), // API doesn't return createdAt?
         approved: true,
     }));
@@ -94,8 +94,102 @@ export const getFoundItems = async (): Promise<Item[]> => {
         posterName: item.personName,
         section: "N/A",
         email: item.reporterEmail,
-        imageUrl: item.imageUrl,
+        imageUrl: item.photo ? `data:image/jpeg;base64,${item.photo}` : undefined,
         createdAt: new Date().toISOString(),
         approved: true,
     }));
+};
+
+export const getLostItemsToApprove = async (): Promise<Item[]> => {
+    const response = await fetch(`${BASE_URL}/getLostItemsToApprove`);
+    if (!response.ok) {
+        throw new Error("Failed to fetch lost items to approve");
+    }
+    const data = await response.json();
+    return data.data.map((item: any) => ({
+        id: item.id.toString(),
+        status: "lost",
+        name: item.itemName,
+        category: mapCategoryToFrontend(item.category),
+        description: item.description,
+        location: item.location,
+        date: item.date,
+        posterName: item.personName,
+        section: "N/A",
+        email: item.reporterEmail,
+        imageUrl: item.photo ? `data:image/jpeg;base64,${item.photo}` : undefined,
+        createdAt: new Date().toISOString(),
+        approved: false,
+    }));
+};
+
+export const getFoundItemsToApprove = async (): Promise<Item[]> => {
+    const response = await fetch(`${BASE_URL}/getFoundItemsToApprove`);
+    if (!response.ok) {
+        throw new Error("Failed to fetch found items to approve");
+    }
+    const data = await response.json();
+    return data.data.map((item: any) => ({
+        id: item.id.toString(),
+        status: "found",
+        name: item.itemName,
+        category: mapCategoryToFrontend(item.category),
+        description: item.description,
+        location: item.location,
+        date: item.date,
+        posterName: item.personName,
+        section: "N/A",
+        email: item.reporterEmail,
+        imageUrl: item.photo ? `data:image/jpeg;base64,${item.photo}` : undefined,
+        createdAt: new Date().toISOString(),
+        approved: false,
+    }));
+};
+
+export const approveLostItem = async (requestNumber: number, decision: boolean) => {
+    const response = await fetch(`${BASE_URL}/approveLostItem`, {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ requestNumber, decision }),
+    });
+    if (!response.ok) {
+        throw new Error("Failed to update lost item approval status");
+    }
+    return response.json();
+};
+
+export const approveFoundItem = async (requestNumber: number, decision: boolean) => {
+    const response = await fetch(`${BASE_URL}/approveFoundItem`, {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ requestNumber, decision }),
+    });
+    if (!response.ok) {
+        throw new Error("Failed to update found item approval status");
+    }
+    return response.json();
+};
+
+export const removeLostItem = async (id: number) => {
+    const response = await fetch(`${BASE_URL}/removeLostItem/${id}`, {
+        method: "DELETE",
+    });
+    if (!response.ok) {
+        throw new Error("Failed to remove lost item");
+    }
+    return response.json();
+};
+
+export const removeFoundItem = async (id: number) => {
+    const response = await fetch(`${BASE_URL}/removeFoundItem/${id}`, {
+        method: "DELETE",
+    });
+    if (!response.ok) {
+        throw new Error("Failed to remove found item");
+    }
+    return response.json();
 };
