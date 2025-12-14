@@ -20,7 +20,7 @@ import {
 } from "@/components/ui/card";
 import { useToast } from "@/hooks/use-toast";
 import { ItemStatus, ItemCategory } from "@/types/item";
-import { imageToBase64 } from "@/lib/utils"; // <-- IMPORTANT
+import { postLostItem, postFoundItem, mapCategoryToApi } from "@/services/api";
 
 const Post = () => {
   const { toast } = useToast();
@@ -43,38 +43,38 @@ const Post = () => {
   // 📌 FORM SUBMIT HANDLER
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    const formData = new FormData(e.currentTarget);
+    const form = e.currentTarget; // Capture form reference
+    const formData = new FormData(form);
 
-    // Convert image → Base64
-    let base64Image = "";
-    if (image) {
-      base64Image = await imageToBase64(image);
-    }
-
-    // Create payload object to send to Google Sheets
-    const payload = {
-      status,
-      name: formData.get("name"),
-      category,
-      description: formData.get("description"),
-      location: formData.get("location"),
+    // Prepare FormData for API
+    // The API expects 'item' as a JSON string and 'photo' as a file
+    const itemData = {
+      personName: formData.get("posterName"),
+      itemName: formData.get("name"),
       date: formData.get("date"),
-      posterName: formData.get("posterName"),
-      section: formData.get("section"),
-      email: formData.get("email"),
-      image: base64Image,
+      description: formData.get("description"),
+      category: mapCategoryToApi(category),
+      itemType: status === "lost" ? "LOST" : "FOUND",
+      location: formData.get("location"),
+      reporterEmail: formData.get("email"),
     };
 
-    console.log("Submitting to Google Sheets:", payload);
+    const apiFormData = new FormData();
+    apiFormData.append("item", new Blob([JSON.stringify(itemData)], { type: "application/json" }));
 
-    // 📌 SEND to Google Apps Script Web App
+    if (image) {
+      apiFormData.append("photo", image);
+    }
+
+    console.log("Submitting to API:", itemData);
+
+    // 📌 SEND to Backend API
     try {
-      await fetch("https://script.google.com/macros/s/AKfycbwlK5qmmkkznm9OLYpryahAVqpCJkDjQ3FiitwJ4zfXH7X9dkjlx-PW5AhKCsXL-JY4/exec", {
-        method: "POST",
-        mode: "no-cors",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(payload),
-      });
+      if (status === "lost") {
+        await postLostItem(apiFormData);
+      } else {
+        await postFoundItem(apiFormData);
+      }
 
       toast({
         title: "Success!",
@@ -82,18 +82,17 @@ const Post = () => {
           "Your post has been submitted and is pending approval.",
       });
 
-      e.currentTarget.reset();
+      form.reset(); // Use captured form reference
       setImage(null);
       setImagePreview("");
       setStatus("lost");
       setCategory("other");
-    } catch (error) {
-      console.error(error);
+    } catch (error: any) {
+      console.error("Error submitting post:", error);
 
       toast({
         title: "Error",
-        description:
-          "Something went wrong. Please try again.",
+        description: error.message || "Something went wrong. Please try again.",
         variant: "destructive",
       });
     }
