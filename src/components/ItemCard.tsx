@@ -1,7 +1,10 @@
 import { Item } from "@/types/item";
 import { Card, CardContent, CardHeader, CardTitle } from "./ui/card";
 import { Badge } from "./ui/badge";
-import { Calendar, MapPin, User, Mail } from "lucide-react";
+import { Button } from "./ui/button";
+import { Calendar, MapPin, User, Mail, Trash2 } from "lucide-react";
+import { removeLostItem, removeFoundItem } from "@/services/api";
+import { useAuth } from "@/contexts/AuthContext";
 
 interface ItemCardProps {
   item: Item;
@@ -17,6 +20,28 @@ const categoryLabels: Record<string, string> = {
 };
 
 const ItemCard = ({ item }: ItemCardProps) => {
+  const { user } = useAuth();
+
+  const handleDelete = async () => {
+    const confirmDelete = window.confirm(
+      "Are you sure you want to delete this post?"
+    );
+    if (!confirmDelete) return;
+
+    try {
+      if (item.status === "lost") {
+        await removeLostItem(Number(item.id));
+      } else {
+        await removeFoundItem(Number(item.id));
+      }
+
+      window.location.reload();
+    } catch (error) {
+      alert("Failed to delete item");
+      console.error(error);
+    }
+  };
+
   return (
     <Card className="overflow-hidden hover:border-primary transition-all hover:shadow-lg group">
       {item.imageUrl && (
@@ -28,7 +53,7 @@ const ItemCard = ({ item }: ItemCardProps) => {
           />
         </div>
       )}
-      
+
       <CardHeader>
         <div className="flex items-start justify-between gap-2">
           <CardTitle className="text-xl">{item.name}</CardTitle>
@@ -36,9 +61,23 @@ const ItemCard = ({ item }: ItemCardProps) => {
             {item.status === "lost" ? "Lost" : "Found"}
           </Badge>
         </div>
-        <Badge variant="outline" className="w-fit">
-          {categoryLabels[item.category]}
-        </Badge>
+
+        <div className="flex items-center justify-between">
+          <Badge variant="outline" className="w-fit">
+            {categoryLabels[item.category]}
+          </Badge>
+
+          {user && (
+            <Button
+              variant="destructive"
+              size="sm"
+              onClick={handleDelete}
+            >
+              <Trash2 className="w-4 h-4 mr-1" />
+              Delete
+            </Button>
+          )}
+        </div>
       </CardHeader>
 
       <CardContent className="space-y-3">
@@ -51,7 +90,7 @@ const ItemCard = ({ item }: ItemCardProps) => {
             <MapPin className="w-4 h-4" />
             <span>{item.location}</span>
           </div>
-          
+
           <div className="flex items-center gap-2 text-muted-foreground">
             <Calendar className="w-4 h-4" />
             <span>{new Date(item.date).toLocaleDateString()}</span>
@@ -62,10 +101,13 @@ const ItemCard = ({ item }: ItemCardProps) => {
               <User className="w-4 h-4" />
               <span>{item.posterName} • {item.section}</span>
             </div>
-            
+
             <div className="flex items-center gap-2 text-muted-foreground">
               <Mail className="w-4 h-4" />
-              <a href={`mailto:${item.email}`} className="text-primary hover:underline">
+              <a
+                href={`mailto:${item.email}`}
+                className="text-primary hover:underline"
+              >
                 {item.email}
               </a>
             </div>
